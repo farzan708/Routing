@@ -28,6 +28,10 @@ root.render(
           </Route>
           <Route path="/about" element={<About />}></Route>
         </Route>
+        {/* هر چیزی غیراز موارد بالا  */}
+        <Route path="*" element={<main style={{padding:"1rem"}}>
+          <p>موجود نمی باشد این آدرس</p>
+        </main>}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
