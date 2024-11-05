@@ -1,9 +1,11 @@
-import { Link, NavLink, Outlet, useSearchParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useSearchParams, useLocation  } from "react-router-dom";
 
 import { getBooks } from "../data/data";
 
 const Books = () => {
   const [searchParams, setSearchparams] = useSearchParams();
+  const location=useLocation();
+  console.log(location)
   const books = getBooks();
 
   return (
@@ -25,7 +27,7 @@ const Books = () => {
             let filter=searchParams.get("filter");
             if(!filter) return true;
             let name = book.name.toLowerCase();
-            return name.startsWith(filter.toLowerCase());
+            return name.includes(filter.toLowerCase());
 
           }).map((book) => (
           <NavLink
@@ -36,7 +38,7 @@ const Books = () => {
                 color: isActive ? "red" : "",
               };
             }}
-            to={`/books/${book.number}`}
+            to={`/books/${book.number}${location.search}`}
             key={book.number}
           >
             {book.name}

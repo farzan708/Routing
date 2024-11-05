@@ -1,8 +1,10 @@
-import { useParams } from "react-router-dom";
-import { getBook } from "../data/data";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { getBook, deleteBook } from "../data/data";
 
 const Book = () => {
   const params = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const book = getBook(parseInt(params.bookId));
 
   if (book) {
@@ -13,13 +15,20 @@ const Book = () => {
         <p>نام کتاب : {book.name}</p>
         <p>قیمت کتاب : {book.amount}</p>
         <p>سال انتشار : {book.due}</p>
-        <button>حذف</button>
+        <button
+          onClick={() => {
+            deleteBook(book.number);
+            navigate("/books" + location.search);
+          }}
+        >
+          حذف
+        </button>
       </main>
     );
   } else {
     return (
       <main style={{ padding: "1rem" }}>
-        <h2>  کتاب با این شناسه موجود نمی باشد  </h2>
+        <h2> کتاب با این شناسه موجود نمی باشد </h2>
       </main>
     );
   }

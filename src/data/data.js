@@ -1,4 +1,4 @@
-const books = [
+let books = [
   {
     name: "اثر مرکب",
     number: 21,
@@ -40,5 +40,9 @@ export const getBooks = () => {
 };
 
 export const getBook = (number) => {
-  return books.find(book => book.number === number);
+  return books.find((book) => book.number === number);
+};
+
+export const deleteBook = (number) => {
+  return books = books.filter((book) => book.number !== number);
 };
